@@ -1,0 +1,79 @@
+Redis Installation Guide for Windows 
+This guide helps you install Redis locally on a Windows machine and configure it to run as a background service so developers don’t need to start it manually.
+________________________________________
+Step 1: Download Redis for Windows
+1.	Go to the official Microsoft-archived Redis build:
+ 🔗 https://github.com/microsoftarchive/redis/releases
+
+2.	Download this file:
+Redis-x64-3.0.504.zip (Stable & commonly used build)
+
+Alternatively, you can access the pre-downloaded setup from the shared drive under the Screener Environment folder.
+
+3.	Extract the zip to a folder, e.g.:
+C:\Redis-x64-3.0.504
+
+________________________________________
+Step 2: Test Redis Manually (Optional but Recommended)
+1.	Open Command Prompt as Administrator
+
+2.	Navigate to the Redis folder:
+ cd C:\Redis-x64-3.0.504
+
+3.	Start Redis:
+redis-server.exe redis.windows.conf
+
+4.	Open another Command Prompt, navigate to the same folder:
+redis-cli.exe
+Ping
+5.	 You should see: PONG
+
+________________________________________
+  Step 3: Install Redis as a Windows Service
+1.	Open Command Prompt as Administrator
+
+2.	Run the following:
+
+cd C:\Redis-x64-3.0.504 redis-server --service-install redis.windows.conf --loglevel verbose
+
+3.	 This installs Redis as a Windows service using the config file.
+
+
+4.	Now start the service:
+redis-server --service-start
+
+________________________________________
+Step 4: 
+Redis Connection Test 
+Inside the redis-implementation folder, a basic Node.js script is provided to test whether Redis is successfully installed and running locally.
+ Purpose:
+●	Verify Redis is reachable and operational.
+
+●	Demonstrate basic usage: connecting, setting, and getting a key-value pair.
+
+Location:
+●	File path: redis-implementation/redis-test.js
+
+●	This script is meant to be included as part of the Screener environment setup to help developers validate their local Redis installation.
+
+ How to Use:
+1.	Make sure Redis is installed and running (either manually or as a background service).
+
+2.	In the terminal, navigate to this directory:
+cd redis-implementation
+3.	Run the test script:
+node redis-test.js
+
+ Expected Output:
+●	Should log:Stored value: deeksha
+●	If Redis is not installed or not running, a connection error will be shown in the console.
+
+Notes:
+●	This script uses the official redis npm package (npm install redis)
+
+●	Redis must be running on localhost:6379 for the test to succeed.
+
+________________________________________
+
+
+
